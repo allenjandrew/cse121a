@@ -8,7 +8,7 @@
 ;; attackResult = round ((attackForce / totalDamage) * attacker.attack * 4.5)
 ;; defenseResult = round ((defenseForce / totalDamage) * defender.defense * 4.5)
 
-;; Questions to ask:
+;; Questions to ask the user:
 ;; attacker: unit-type? health? veteran? embarked? ship-type?
 ;; defender: unit-type? health? veteran? defended? fortified? embarked? ship-type? distance?
 
@@ -79,4 +79,4 @@
         ;; Calculate attacker new health, if the defender was not killed, and if attacker is in defender's range
         attacker-newhealth (if (and (<= distance (defender-stats :range)) (> defender-newhealth 0)) (if (< (- attacker-health defense-result) 0) 0 (- attacker-health defense-result)) attacker-health)]
     ;; Print results
-    (println "Attacker:" (attacker-stats :type) "with" attacker-health "out of" attacker-maxhealth "health\nDefender:" (defender-stats :type) "with" defender-health "out of" defender-maxhealth "health\nRange:" distance "\nResults:\nAttacker:" attacker-newhealth "out of" attacker-maxhealth "health" (when (= 0 attacker-newhealth) "(dead)") "\nDefender:" defender-newhealth "out of" defender-maxhealth "health" (when (= 0 defender-newhealth) "(dead)"))))
+    (println "Attacker:" (attacker-stats :type) "with" attacker-health "out of" attacker-maxhealth "health\nDefender:" (defender-stats :type) "with" defender-health "out of" defender-maxhealth "health\nRange:" distance "\nResults:\nAttacker:" attacker-newhealth "out of" attacker-maxhealth "health" (if (= 0 attacker-newhealth) "(dead)" "") "\nDefender:" defender-newhealth "out of" defender-maxhealth "health" (if (= 0 defender-newhealth) "(dead)" ""))))
